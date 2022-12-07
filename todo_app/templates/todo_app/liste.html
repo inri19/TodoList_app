@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <div>
+        <div>
+            <h3>Modifier votre liste:</h3>
+            <h5>{{ liste.titre | upper }}</h5>
+        </div>
+        <ul>
+            {% for tache in taches %}
+            <li>
+                {% if tache.statut == True %}
+
+                    <div>
+                        <a href="{% url 'tache_details_update' pk=liste.id id=tache.id %}" style="text-decoration: none;">
+                            <div
+                                role="button"  style="background-color: green;">
+                                {{ tache.titre }}
+                            </div>
+                        </a>
+                    </div>
+
+                {% else %}
+
+                    <div>
+                        <a href="{% url 'tache_details_update' pk=liste.id id=tache.id %}">
+                            <div
+                                role="button">
+                                {{ tache.titre }}
+                            </div>
+                        </a>
+                    </div>
+
+                {% endif %}
+            </li>
+            {% empty %}
+            <p>Aucune tache dans cette liste.</p>
+            {% endfor %}
+        </ul>
+        <p>
+
+        <a href="{% url 'creer_tache' id=liste.id %}">
+            <input value="Ajouter une tache" type="button"/>
+        </a>
+
+        <a href="{% url 'supprimer_liste' id=liste.id %}">
+            <input value="Supprimer la liste" type="button" style="background-color: rgba(180, 0, 0, 0.658); margin-left: 15px;"/>
+        </a>
+
+        </p>
+    </div>
+</div>
+
+{% endblock %}

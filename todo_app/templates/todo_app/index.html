@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--index.html-->
+{% if listes %}
+<h3>Toutes mes listes</h3>
+{% endif %}
+<ul>
+    {% for liste in listes %}
+    <a href="{% url 'liste' id=liste.id %}">
+        <li>
+            <div role="button">{{ liste.titre }}</div>
+        </li>
+    </a>
+    {% empty %}
+    <h4>Vous n'avez aucune liste!</h4>
+    {% endfor %}
+</ul>
+
+<p><a href="{% url 'creer_liste' %}">
+    <input value="Creer une liste" type="button"/>
+</a></p>
+
+{% endblock %}
